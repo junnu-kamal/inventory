@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12 p-0">
+        <mat-toolbar color="primary">
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>Pala Bandi</span>
+          <span class="example-spacer"></span>
+            <button (click)="refresh()" mat-icon-button class="example-icon favorite-cart" aria-label="Example icon-button with heart icon">
+              <mat-icon>refresh</mat-icon>
+            </button>
+            <button (click)="openOrderBook()" mat-icon-button class="example-icon favorite-cart" aria-label="Example icon-button with heart icon">
+              <mat-icon  [matBadge]="cart.length" matBadgeColor="accent">shopping_cart</mat-icon>
+            </button>
+        </mat-toolbar>
+      </div>
+    </div>
+</div>
+
+<div class="container">
+   <div class="row">
+      <div class="col-md-4 col-lg-3 col-6 mt-4" *ngFor="let product of products">
+          <mat-card  class="example-card cursor-pointer" >
+            <img class="img-responsive" [src]="product.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p class="text-center p-2"  style="font-size: 12px;">
+                {{ product.product_name }}:  <b>₹{{ product.sell_price }}</b>
+              </p>
+              <div class="col-12">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <button class="input-group-text" (click)="decreaseQty(product); onQtyChange(product)"> - </button>
+                    </div>
+                    <input min="0" type="number" (change)="onQtyChange(product)" step="1" class="form-control"  [(ngModel)]="product.quantity" >
+                    <div class="input-group-append">
+                      <button class="input-group-text" (click)="increaseQty(product);onQtyChange(product);" id="basic-addon1">+</button>
+                    </div>
+                  </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+      </div>
+   </div>
+</div>
